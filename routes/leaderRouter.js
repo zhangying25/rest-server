@@ -1,6 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var leaderRouter = express.Router();
+var Verify = require('./verify');
 
 leaderRouter.use(bodyParser.json());
 

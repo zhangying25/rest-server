@@ -17,7 +17,7 @@ exports.verifyOrdinaryUser = function(req, res, next) {
         // verifies secret and checks exp
         jwt.verify(token, config.secretKey, function(err, decoded) {
             if (err) {
-                var err = new Error('You are not authenticated!');
+                var err = new Error('You are not authorized to perform this operation!');
                 err.status = 401;
                 return next(err);
             } else {
@@ -42,7 +42,7 @@ exports.verifyAdmin = function(req, res, next) {
         console.log("is an admin");
         next();
     } else {
-        var err = new Error('Admin privilege required!')
+        var err = new Error('You are not authorized to perform this operation!')
         err.status = 403;
         return next(err);
     }

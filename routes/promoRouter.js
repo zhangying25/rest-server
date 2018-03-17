@@ -1,6 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var promoRouter = express.Router();
+var Verify = require('./verify');
 
 promoRouter.use(bodyParser.json());
 
