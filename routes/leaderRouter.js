@@ -12,15 +12,15 @@ leaderRouter.route('/')
         next();
     })
 
-    .get(function(req, res, next) {
+    .get(Verify.verifyOrdinaryUser, function(req, res, next) {
         res.end('Will send all the leaders to you!');
     })
 
-    .post(function(req, res, next) {
+    .post(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next) {
         res.end('Will add the leader: ' + req.body.name + ' with details: ' + req.body.description);
     })
 
-    .delete(function(req, res, next) {
+    .delete(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next) {
         res.end('Deleting all leaders');
     });
 
@@ -32,16 +32,16 @@ leaderRouter.route('/:id')
         next();
     })
 
-    .get(function(req, res, next) {
+    .get(Verify.verifyOrdinaryUser, function(req, res, next) {
         res.end('Will send details of the leader: ' + req.params.id + ' to you!');
     })
 
-    .put(function(req, res, next) {
+    .put(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next) {
         res.write('Updating the leader: ' + req.params.id + '\n');
         res.end('Will update the leader: ' + req.body.name + ' with details: ' + req.body.description);
     })
 
-    .delete(function(req, res, next) {
+    .delete(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next) {
         res.end('Deleting leader: ' + req.params.id);
     });
 
