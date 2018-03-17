@@ -34,3 +34,16 @@ exports.verifyOrdinaryUser = function(req, res, next) {
         return next(err);
     }
 };
+
+exports.verifyAdmin = function(req, res, next) {
+
+    console.log(req.decoded);
+    if (req.decoded.admin) {
+        console.log("is an admin");
+        next();
+    } else {
+        var err = new Error('Admin privilege required!')
+        err.status = 403;
+        return next(err);
+    }
+};
