@@ -30,12 +30,18 @@ favoriteRouter.route('/')
                     console.log("Finding favorite: " + favorite + ", user_id: " + req.decoded._id)
                     if (favorite) {
                         console.log("Existing favorite: " + favorite + ", body_id: " + req.body._id)
-                        favorite.dishes.push(req.body._id);
-                        favorite.save(function(err, favorite) {
-                            if (err) throw err;
-                            console.log('Updated Favorites!');
+                        var index = favorite.dishes.indexOf(req.body._id);
+                        if (index > -1) {
+                            console.log('Dish already in Favorites!');
                             res.json(favorite);
-                        });
+                        } else {
+                            favorite.dishes.push(req.body._id);
+                            favorite.save(function(err, favorite) {
+                                if (err) throw err;
+                                console.log('Added to Favorites!');
+                                res.json(favorite);
+                            });
+                        }
                     } else {
                         Favorites.create({ postedBy: req.decoded._id }, function(err, favorite) {
                             if (err) throw err;
