@@ -13,7 +13,6 @@ router.route('/')
         });
     })
 
-
 router.post('/register', function(req, res) {
     User.register(new User({
             username: req.body.username
